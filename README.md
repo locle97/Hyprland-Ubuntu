@@ -83,11 +83,25 @@ sudo apt install libxcb*
 19. tomlplusplus
 sudo apt install libtomlplusplus-dev
 
+20. Hyprland-qtutils
+sudo apt install qt6*
+
+```
+git clone https://github.com/hyprwm/hyprland-qtutils
+cd hyprland-qtutils
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
+cd ./build
+sudo make install
+cd -
+```
+
 n. Clone and install Hyprland
 ```sh
 git clone -b v0.48.0 https://github.com/hyprwm/Hyprland --recursive ~/Hyprland
 cd ~/Hyprland
 make all && sudo make install
+
 ```
 
 n+1. Ricing
