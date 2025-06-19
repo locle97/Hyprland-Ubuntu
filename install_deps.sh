@@ -17,7 +17,7 @@ sudo apt install -y \
   libwayland* wayland-protocols libgbm* libdisplay* libhyprlang* \
   libhyprcursor* libcairo* libjpeg-dev libwebp-dev libmagic-dev \
   libpango* libpangocairo* libxcursor* libxcb* libtomlplusplus-dev \
-  qt6* neofetch tmux eza zoxide fzf npm
+  qt6* neofetch tmux eza zoxide fzf npm libpugixml-dev
 
 echo "[+] Building hyprwayland-scanner v0.40 from source..."
 git clone --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
