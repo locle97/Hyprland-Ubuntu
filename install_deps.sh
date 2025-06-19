@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
-# Install all apt dependencies for Hyprland and related tools
+
+echo "[+] Installing dependencies..."
 sudo apt update
+echo "[+] Installing apt packages for Hyprland and related tools..."
 sudo apt install -y \
   meson wget build-essential ninja-build cmake-extras cmake gettext \
   gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
@@ -16,3 +18,4 @@ sudo apt install -y \
   libhyprcursor* libcairo* libjpeg-dev libwebp-dev libmagic-dev \
   libpango* libpangocairo* libxcursor* libxcb* libtomlplusplus-dev \
   qt6* neofetch tmux eza zoxide fzf npm
+echo "[+] Dependencies installed."
