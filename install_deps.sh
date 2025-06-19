@@ -20,7 +20,7 @@ sudo apt install -y \
   qt6* neofetch tmux eza zoxide fzf npm
 
 echo "[+] Building hyprwayland-scanner v0.40 from source..."
-git clone --branch v0.40 --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
+git clone --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
 cd hyprwayland-scanner
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j$(nproc)
