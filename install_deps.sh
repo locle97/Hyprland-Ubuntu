@@ -14,7 +14,7 @@ sudo apt install -y \
   libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev \
   libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev \
   libxcb-xinput-dev libtomlplusplus3 libre2-dev \
-  libwayland* wayland-protocols libgbm* libdisplay* libhyprlang* \
+  libwayland* libgbm* libdisplay* libhyprlang* \
   libhyprcursor* libcairo* libjpeg-dev libwebp-dev libmagic-dev \
   libpango* libpangocairo* libxcursor* libxcb* libtomlplusplus-dev \
   qt6* neofetch tmux eza zoxide fzf npm libpugixml-dev
@@ -27,5 +27,14 @@ cmake --build build -j$(nproc)
 sudo cmake --install build
 cd ..
 echo "[+] hyprwayland-scanner v0.40 installed."
+
+echo "[+] Building wayland-protocols (latest) from source..."
+git clone --depth 1 https://gitlab.freedesktop.org/wayland/wayland-protocols.git || true
+cd wayland-protocols
+meson setup build --prefix=/usr
+ninja -C build
+sudo ninja -C build install
+cd ..
+echo "[+] wayland-protocols (latest) installed."
 
 echo "[+] Dependencies installed."
