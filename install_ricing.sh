@@ -37,4 +37,26 @@ if [ -f lazygit_0.52.0_Linux_x86_64.tar.gz ]; then
 fi
 cd -
 
+# 8. Build and install latest hypridle from source
+if [ ! -d hypridle ]; then
+  git clone https://github.com/hyprwm/hypridle.git
+fi
+cd hypridle
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hypridle (latest) installed."
+
+# 9. Build and install latest hyprlock from source
+if [ ! -d hyprlock ]; then
+  git clone https://github.com/hyprwm/hyprlock.git
+fi
+cd hyprlock
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprlock (latest) installed."
+
 echo "[+] Ricing tools installation complete."
