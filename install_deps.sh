@@ -19,22 +19,4 @@ sudo apt install -y \
   libpango* libpangocairo* libxcursor* libxcb* libtomlplusplus-dev \
   qt6* neofetch tmux eza zoxide fzf npm libpugixml-dev
 
-echo "[+] Building hyprwayland-scanner v0.40 from source..."
-git clone --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
-cd hyprwayland-scanner
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j$(nproc)
-sudo cmake --install build
-cd ..
-echo "[+] hyprwayland-scanner v0.40 installed."
-
-echo "[+] Building wayland-protocols (latest) from source..."
-git clone --depth 1 https://gitlab.freedesktop.org/wayland/wayland-protocols.git || true
-cd wayland-protocols
-meson setup build --prefix=/usr
-ninja -C build
-sudo ninja -C build install
-cd ..
-echo "[+] wayland-protocols (latest) installed."
-
 echo "[+] Dependencies installed."

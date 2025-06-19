@@ -8,17 +8,29 @@ sudo apt update
 echo "[+] Installing apt packages..."
 sudo apt install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev libtomlplusplus3 libre2-dev
 
-echo "[+] Installing hyprscanner..."
-# 1. Install hyprscanner
-sudo apt install -y hyprwayland-scanner
+echo "[+] Building hyprwayland-scanner v0.40 from source..."
+# 1. Build hyprwayland-scanner v0.40 from source
+git clone --depth 1 --branch v0.40 https://github.com/hyprwm/hyprwayland-scanner.git || true
+cd hyprwayland-scanner
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprwayland-scanner v0.40 installed."
 
 echo "[+] Installing wayland-client..."
 # 2. wayland-client
 sudo apt install -y libwayland*
 
-echo "[+] Installing wayland-protocols..."
-# 3. wayland-protocols
-sudo apt install -y wayland-protocols
+echo "[+] Building wayland-protocols (latest) from source..."
+# 3. Build wayland-protocols (latest) from source
+git clone --depth 1 https://gitlab.freedesktop.org/wayland/wayland-protocols.git || true
+cd wayland-protocols
+meson setup build --prefix=/usr
+ninja -C build
+sudo ninja -C build install
+cd ..
+echo "[+] wayland-protocols (latest) installed."
 
 echo "[+] Building hyprutils..."
 # 4. hyprutils >=0.5.2
