@@ -13,9 +13,19 @@ sudo apt install -y \
   libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev \
   libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev \
   libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev \
-  libxcb-xinput-dev libtomlplusplus3 libre2-dev hyprwayland-scanner \
+  libxcb-xinput-dev libtomlplusplus3 libre2-dev \
   libwayland* wayland-protocols libgbm* libdisplay* libhyprlang* \
   libhyprcursor* libcairo* libjpeg-dev libwebp-dev libmagic-dev \
   libpango* libpangocairo* libxcursor* libxcb* libtomlplusplus-dev \
   qt6* neofetch tmux eza zoxide fzf npm
+
+echo "[+] Building hyprwayland-scanner v0.40 from source..."
+git clone --branch v0.40 --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
+cd hyprwayland-scanner
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprwayland-scanner v0.40 installed."
+
 echo "[+] Dependencies installed."
