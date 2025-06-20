@@ -90,6 +90,9 @@ sudo meson install -C build
 cd ..
 echo "[+] hyprland-protocols (latest) installed."
 
+# 11. Install PAM and sdbus-c++ dependencies for hyprlock
+sudo apt install -y libpam0g-dev libsdbus-c++-dev
+
 # 12. Build and install latest hyprlock from source
 if [ ! -d hyprlock ]; then
   git clone https://github.com/hyprwm/hyprlock.git
