@@ -26,11 +26,20 @@ sudo apt-get install -f -y
 sudo npm install yarn -g
 
 # 3. Install fish shell and set as default
-sudo apt install -y fish
-chsh -s /usr/bin/fish
+if [ "$SHELL" != "/usr/bin/fish" ]; then
+  sudo apt install -y fish
+  chsh -s /usr/bin/fish
+  echo "[+] fish shell installed and set as default."
+else
+  echo "[+] fish shell is already the default shell. Skipping installation."
+fi
 
 # 4. Oh-My-Posh
-curl -s https://ohmyposh.dev/install.sh | bash -s
+if command -v oh-my-posh >/dev/null 2>&1; then
+  echo "[+] Oh-My-Posh is already installed. Skipping installation."
+else
+  curl -s https://ohmyposh.dev/install.sh | bash -s
+fi
 
 # 5. Tmux plugin manager
 if [ ! -d ~/.tmux/plugins/tpm ]; then
@@ -43,15 +52,19 @@ if [ ! -d ~/.config/nvim ]; then
 fi
 
 # 7. lazygit
-cd ~/Downloads/
-wget https://github.com/jesseduffield/lazygit/releases/download/v0.52.0/lazygit_0.52.0_Linux_x86_64.tar.gz
-if [ -f lazygit_0.52.0_Linux_x86_64.tar.gz ]; then
-  tar -xzf lazygit_0.52.0_Linux_x86_64.tar.gz
-  rm lazygit_0.52.0_Linux_x86_64.tar.gz
-  mkdir -p ~/.local/bin
-  mv lazygit ~/.local/bin/
+if [ -f ~/.local/bin/lazygit ]; then
+  echo "[+] lazygit is already installed. Skipping installation."
+else
+  cd ~/Downloads/
+  wget https://github.com/jesseduffield/lazygit/releases/download/v0.52.0/lazygit_0.52.0_Linux_x86_64.tar.gz
+  if [ -f lazygit_0.52.0_Linux_x86_64.tar.gz ]; then
+    tar -xzf lazygit_0.52.0_Linux_x86_64.tar.gz
+    rm lazygit_0.52.0_Linux_x86_64.tar.gz
+    mkdir -p ~/.local/bin
+    mv lazygit ~/.local/bin/
+  fi
+  cd -
 fi
-cd -
 
 # 8. Build and install hyprlang from source
 if [ ! -d hyprlang ]; then
