@@ -72,9 +72,8 @@ if [ ! -d hyprland-protocols ]; then
   git clone https://github.com/hyprwm/hyprland-protocols.git
 fi
 cd hyprland-protocols
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j$(nproc)
-sudo cmake --install build
+meson setup build
+sudo meson install -C build
 cd ..
 echo "[+] hyprland-protocols (latest) installed."
 
