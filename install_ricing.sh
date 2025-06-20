@@ -77,17 +77,6 @@ sudo meson install -C build
 cd ..
 echo "[+] hyprland-protocols (latest) installed."
 
-# 11. Build and install latest hypridle from source
-if [ ! -d hypridle ]; then
-  git clone https://github.com/hyprwm/hypridle.git
-fi
-cd hypridle
-cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
-cmake --build ./build --config Release --target hypridle -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
-sudo cmake --install build
-cd ..
-echo "[+] hypridle (latest) installed."
-
 # 12. Build and install latest hyprlock from source
 if [ ! -d hyprlock ]; then
   git clone https://github.com/hyprwm/hyprlock.git
