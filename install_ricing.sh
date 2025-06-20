@@ -4,7 +4,22 @@ echo "[+] Installing ricing tools and configs..."
 
 # 1. Install terminal emulators and utilities
 sudo apt update
-sudo apt install -y ghostty kitty wlsunset wl-clipboard google-chrome-stable waybar neofetch tmux eza zoxide fzf npm
+sudo apt install -y kitty wlsunset wl-clipboard waybar neofetch tmux eza zoxide fzf npm
+
+# Install latest ghostty
+GHOSTTY_URL=$(curl -s https://api.github.com/repos/ghostty-org/ghostty/releases/latest | grep browser_download_url | grep linux-x86_64 | grep -v .sig | cut -d '"' -f 4 | head -n 1)
+echo "[+] Downloading ghostty from $GHOSTTY_URL"
+curl -L "$GHOSTTY_URL" -o /tmp/ghostty.tar.gz
+tar -xzf /tmp/ghostty.tar.gz -C /tmp/
+sudo mv /tmp/ghostty /usr/local/bin/
+sudo chmod +x /usr/local/bin/ghostty
+
+# Install latest google-chrome-stable
+CHROME_URL=$(curl -s https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)
+echo "[+] Downloading Google Chrome..."
+curl -L -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./tmp/google-chrome-stable_current_amd64.deb || sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+sudo apt-get install -f -y
 
 # 2. Install yarn
 sudo npm install yarn -g
