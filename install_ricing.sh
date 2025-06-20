@@ -67,7 +67,18 @@ echo "[+] hyprlang (latest) installed."
 # 9. Install sdbus-c++ using apt
 sudo apt install -y libsdbus-c++-dev
 
-# 10. Build and install latest hypridle from source
+# 10. Build and install hyprland-protocols from source
+if [ ! -d hyprland-protocols ]; then
+  git clone https://github.com/hyprwm/hyprland-protocols.git
+fi
+cd hyprland-protocols
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprland-protocols (latest) installed."
+
+# 11. Build and install latest hypridle from source
 if [ ! -d hypridle ]; then
   git clone https://github.com/hyprwm/hypridle.git
 fi
@@ -78,7 +89,7 @@ sudo cmake --install build
 cd ..
 echo "[+] hypridle (latest) installed."
 
-# 11. Build and install latest hyprlock from source
+# 12. Build and install latest hyprlock from source
 if [ ! -d hyprlock ]; then
   git clone https://github.com/hyprwm/hyprlock.git
 fi
