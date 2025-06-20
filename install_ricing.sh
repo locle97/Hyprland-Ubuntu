@@ -7,7 +7,11 @@ sudo apt update
 sudo apt install -y kitty wlsunset wl-clipboard waybar neofetch tmux eza zoxide fzf npm
 
 # Install latest ghostty
-GHOSTTY_URL=$(curl -s https://api.github.com/repos/ghostty-org/ghostty/releases/latest | grep browser_download_url | grep linux-x86_64 | grep -v .sig | cut -d '"' -f 4 | head -n 1)
+GHOSTTY_URL=$(curl -s https://api.github.com/repos/ghostty-org/ghostty/releases/latest | grep browser_download_url | grep linux-x86_64.tar.gz | grep -v .sig | awk -F '"' '{print $4}' | head -n 1)
+if [ -z "$GHOSTTY_URL" ]; then
+  echo "[!] Failed to find ghostty release URL. Exiting."
+  exit 1
+fi
 echo "[+] Downloading ghostty from $GHOSTTY_URL"
 wget -O /tmp/ghostty.tar.gz "$GHOSTTY_URL"
 tar -xzf /tmp/ghostty.tar.gz -C /tmp/
