@@ -152,47 +152,6 @@ make all && sudo make install
 cd -
 
 echo "[+] Installing ricing tools..."
-# Ricing tools
-sudo apt install -y neofetch tmux eza zoxide fzf
-echo "[+] Installing npm and yarn..."
-sudo apt install -y npm && sudo npm install yarn -g
-
-echo "[+] Cloning tmux and nvim configs..."
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
-git clone https://github.com/locle97/nvim ~/.config/nvim || true
-
-echo "[+] Installing lazygit..."
-# Install lazygit
-cd ~/Downloads/
-wget https://github.com/jesseduffield/lazygit/releases/download/v0.52.0/lazygit_0.52.0_Linux_x86_64.tar.gz
-tar -xzf lazygit_0.52.0_Linux_x86_64.tar.gz
-rm ./lazygit_0.52.0_Linux_x86_64.tar.gz
-mv lazygit ~/.local/bin/
-cd -
-
-echo "[+] Installing NerdFont..."
-# Install NerdFont
-cd ~/Downloads
-mkdir -p SourceCodePro && cd ./SourceCodePro
-echo "[+] Downloading SourceCodePro.zip..."
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/SourceCodePro.zip
-echo "[+] Unzipping SourceCodePro.zip..."
-unzip SourceCodePro.zip
-echo "[+] Moving fonts to ~/.local/share/fonts..."
-mkdir -p ~/.local/share/fonts
-mv ./*.ttf ~/.local/share/fonts/
-echo "[+] Updating font cache..."
-fc-cache -f -v
-cd -
-
-echo "[+] Installing Oh-My-Posh..."
-# Oh-My-Posh
-curl -s https://ohmyposh.dev/install.sh | bash -s
-
-echo "[+] Setting up git config..."
-# Git config
-git config user.email "lpl212757@gmail.com" -g
-git config user.name "Loc Le" -g
-git config credential.helper store -g
+bash ./install_ricing.sh
 
 echo "Hyprland and related tools installation complete!"
