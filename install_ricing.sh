@@ -53,7 +53,29 @@ if [ -f lazygit_0.52.0_Linux_x86_64.tar.gz ]; then
 fi
 cd -
 
-# 8. Build and install latest hypridle from source
+# 8. Build and install hyprlang from source
+if [ ! -d hyprlang ]; then
+  git clone https://github.com/hyprwm/hyprlang.git
+fi
+cd hyprlang
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprlang (latest) installed."
+
+# 9. Build and install sdbus-c++ from source
+if [ ! -d sdbus-cpp ]; then
+  git clone https://github.com/Kistler-Group/sdbus-cpp.git sdbus-cpp
+fi
+cd sdbus-cpp
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DSDBUS_CPP_ENABLE_EXAMPLES=OFF -DSDBUS_CPP_ENABLE_TESTS=OFF
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] sdbus-c++ (latest) installed."
+
+# 10. Build and install latest hypridle from source
 if [ ! -d hypridle ]; then
   git clone https://github.com/hyprwm/hypridle.git
 fi
@@ -64,7 +86,7 @@ sudo cmake --install build
 cd ..
 echo "[+] hypridle (latest) installed."
 
-# 9. Build and install latest hyprlock from source
+# 11. Build and install latest hyprlock from source
 if [ ! -d hyprlock ]; then
   git clone https://github.com/hyprwm/hyprlock.git
 fi
