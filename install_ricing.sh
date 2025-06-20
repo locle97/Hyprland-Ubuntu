@@ -15,10 +15,11 @@ sudo mv /tmp/ghostty /usr/local/bin/
 sudo chmod +x /usr/local/bin/ghostty
 
 # Install latest google-chrome-stable
-CHROME_URL=$(curl -s https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)
+# Download and install the latest Google Chrome .deb package
+CHROME_DEB=/tmp/google-chrome-stable_current_amd64.deb
 echo "[+] Downloading Google Chrome..."
-curl -L -o /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install -y ./tmp/google-chrome-stable_current_amd64.deb || sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+curl -L -o "$CHROME_DEB" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y "$CHROME_DEB" || sudo dpkg -i "$CHROME_DEB"
 sudo apt-get install -f -y
 
 # 2. Install yarn
