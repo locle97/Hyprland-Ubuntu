@@ -11,7 +11,8 @@ GHOSTTY_URL=$(curl -s https://api.github.com/repos/ghostty-org/ghostty/releases/
 echo "[+] Downloading ghostty from $GHOSTTY_URL"
 curl -L "$GHOSTTY_URL" -o /tmp/ghostty.tar.gz
 tar -xzf /tmp/ghostty.tar.gz -C /tmp/
-sudo mv /tmp/ghostty /usr/local/bin/
+GHOSTTY_BIN=$(find /tmp -type f -path "/tmp/ghostty-*-linux-x86_64/ghostty" | head -n 1)
+sudo mv "$GHOSTTY_BIN" /usr/local/bin/ghostty
 sudo chmod +x /usr/local/bin/ghostty
 
 # Install latest google-chrome-stable
