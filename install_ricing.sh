@@ -9,7 +9,7 @@ sudo apt install -y kitty wlsunset wl-clipboard waybar neofetch tmux eza zoxide 
 # Install latest ghostty
 GHOSTTY_URL=$(curl -s https://api.github.com/repos/ghostty-org/ghostty/releases/latest | grep browser_download_url | grep linux-x86_64 | grep -v .sig | cut -d '"' -f 4 | head -n 1)
 echo "[+] Downloading ghostty from $GHOSTTY_URL"
-curl -L "$GHOSTTY_URL" -o /tmp/ghostty.tar.gz
+wget -O /tmp/ghostty.tar.gz "$GHOSTTY_URL"
 tar -xzf /tmp/ghostty.tar.gz -C /tmp/
 GHOSTTY_BIN=$(find /tmp -type f -path "/tmp/ghostty-*-linux-x86_64/ghostty" | head -n 1)
 sudo mv "$GHOSTTY_BIN" /usr/local/bin/ghostty
