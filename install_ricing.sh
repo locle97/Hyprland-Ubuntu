@@ -64,16 +64,8 @@ sudo cmake --install build
 cd ..
 echo "[+] hyprlang (latest) installed."
 
-# 9. Build and install sdbus-c++ from source
-if [ ! -d sdbus-cpp ]; then
-  git clone https://github.com/Kistler-Group/sdbus-cpp.git sdbus-cpp
-fi
-cd sdbus-cpp
-cmake -B build -DCMAKE_BUILD_TYPE=Release -DSDBUS_CPP_ENABLE_EXAMPLES=OFF -DSDBUS_CPP_ENABLE_TESTS=OFF
-cmake --build build -j$(nproc)
-sudo cmake --install build
-cd ..
-echo "[+] sdbus-c++ (latest) installed."
+# 9. Install sdbus-c++ using apt
+sudo apt install -y libsdbus-c++-dev
 
 # 10. Build and install latest hypridle from source
 if [ ! -d hypridle ]; then
