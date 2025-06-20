@@ -43,6 +43,28 @@ sudo cmake --install build
 cd ..
 echo "[+] hyprwayland-scanner v0.40 installed."
 
+# Build wayland-protocols before aquamarine
+log "Building wayland-protocols..."
+echo "[+] Building wayland-protocols..."
+if [ ! -d wayland-protocols ]; then
+  log "Cloning wayland-protocols repository."
+  echo "[+] Cloning wayland-protocols repository."
+  git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+fi
+pushd wayland-protocols > /dev/null
+log "Configuring wayland-protocols with Meson."
+echo "[+] Configuring wayland-protocols with Meson."
+meson setup build --prefix=/usr --buildtype=release
+log "Building wayland-protocols."
+echo "[+] Building wayland-protocols (ninja)..."
+ninja -C build
+log "Installing wayland-protocols."
+echo "[+] Installing wayland-protocols..."
+sudo ninja -C build install
+popd > /dev/null
+
+echo "[+] wayland-protocols done."
+
 # aquamarine
 log "Building aquamarine..."
 echo "[+] Building aquamarine..."
