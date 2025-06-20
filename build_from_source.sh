@@ -33,6 +33,16 @@ popd > /dev/null
 
 echo "[+] hyprutils done."
 
+echo "[+] Building hyprwayland-scanner v0.40 from source..."
+# 1. Build hyprwayland-scanner v0.40 from source
+git clone --depth 1 https://github.com/hyprwm/hyprwayland-scanner.git || true
+cd hyprwayland-scanner
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j$(nproc)
+sudo cmake --install build
+cd ..
+echo "[+] hyprwayland-scanner v0.40 installed."
+
 # aquamarine
 log "Building aquamarine..."
 echo "[+] Building aquamarine..."
