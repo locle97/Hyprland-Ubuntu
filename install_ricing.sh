@@ -7,13 +7,12 @@ sudo apt update
 sudo apt install -y kitty wlsunset wl-clipboard waybar neofetch tmux eza zoxide fzf npm
 
 # Install latest ghostty
-GHOSTTY_URL="https://github.com/mkasberg/ghostty-ubuntu/releases/download/1.1.3-0-ppa2/ghostty_1.1.3-0.ppa2_amd64_24.10.deb"
-echo "[+] Downloading ghostty from $GHOSTTY_URL"
-wget -O /tmp/ghostty.tar.gz "$GHOSTTY_URL"
-tar -xzf /tmp/ghostty.tar.gz -C /tmp/
-GHOSTTY_BIN=$(find /tmp -type f -path "/tmp/ghostty-*-linux-x86_64/ghostty" | head -n 1)
-sudo mv "$GHOSTTY_BIN" /usr/local/bin/ghostty
-sudo chmod +x /usr/local/bin/ghostty
+GHOSTTY_DEB_URL="https://github.com/mkasberg/ghostty-ubuntu/releases/download/1.1.3-0-ppa2/ghostty_1.1.3-0.ppa2_amd64_24.10.deb"
+GHOSTTY_DEB="/tmp/ghostty.deb"
+echo "[+] Downloading ghostty from $GHOSTTY_DEB_URL"
+wget -O "$GHOSTTY_DEB" "$GHOSTTY_DEB_URL"
+sudo apt install -y "$GHOSTTY_DEB" || sudo dpkg -i "$GHOSTTY_DEB"
+sudo apt-get install -f -y
 
 # Install latest google-chrome-stable
 # Download and install the latest Google Chrome .deb package
