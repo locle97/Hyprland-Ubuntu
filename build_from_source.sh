@@ -138,13 +138,19 @@ popd > /dev/null
 
 echo "[+] hyprland-qtutils done."
 
+# Upgrading C++
+sudo apt update
+sudo apt install g++-15 gcc-15
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 100 # Adjust version and priority
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100 # Adjust version and priority
+
 # Hyprland
 log "Building Hyprland..."
 echo "[+] Building Hyprland..."
 if [ ! -d ~/Hyprland ]; then
   log "Cloning Hyprland repository."
   echo "[+] Cloning Hyprland repository."
-  git clone -b v0.48.0 https://github.com/hyprwm/Hyprland --recursive ~/Hyprland
+  git clone -b v0.50.1 https://github.com/hyprwm/Hyprland --recursive ~/Hyprland
 fi
 pushd ~/Hyprland > /dev/null
 log "Building Hyprland."
